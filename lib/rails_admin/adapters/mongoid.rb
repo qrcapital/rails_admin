@@ -71,7 +71,9 @@ module RailsAdmin
 
       def properties
         fields = model.fields.reject { |_name, field| DISABLED_COLUMN_TYPES.include?(field.type.to_s) }
-        fields << model[:teste]
+        if model[:teste].present?
+          fields << model[:teste]
+        end
         fields.collect { |_name, field| Property.new(field, model) }
       end
 
